@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Personel Listesi</h2>
+<a href="/ekle" class="btn btn-primary mb-3">Yeni Personel</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>TCKN</th>
+            <th>Ad Soyad</th>
+            <th>Ünvan</th>
+            <th>Birim</th>
+            <th>Görev</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in personeller %}
+        <tr>
+            <td>{{ p.PersonelID }}</td>
+            <td>{{ p.TCKimlikNo }}</td>
+            <td>{{ p.Ad }} {{ p.Soyad }}</td>
+            <td>{{ p.Unvan }}</td>
+            <td>{{ p.BirimAdi }}</td>
+            <td>{{ p.GorevAdi }}</td>
+            <td>
+                <a href="/sil/{{ p.PersonelID }}" class="btn btn-danger btn-sm" onclick="return confirm('Emin misiniz? Tüm geçmiş silinecek!');">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

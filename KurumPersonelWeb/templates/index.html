@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Aktif Personel</div>
+            <div class="card-body">
+                <h1 class="card-title">{{ p_sayi }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Toplam Birim</div>
+            <div class="card-body">
+                <h1 class="card-title">{{ b_sayi }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Son Sistem Logları (Audit)</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>Tablo</th>
+            <th>İşlem</th>
+            <th>Açıklama</th>
+            <th>Yapan</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in loglar %}
+        <tr>
+            <td>{{ log.IslemTarihi }}</td>
+            <td>{{ log.TabloAdi }}</td>
+            <td><span class="badge bg-info">{{ log.IslemTuru }}</span></td>
+            <td>{{ log.Aciklama }}</td>
+            <td>{{ log.IslemYapan }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

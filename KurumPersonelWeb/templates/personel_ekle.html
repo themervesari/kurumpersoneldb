@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Yeni Personel İşe Alım Formu</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            
+            <h5 class="text-secondary border-bottom pb-2 mb-3">Kimlik Bilgileri</h5>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">TC Kimlik No (*)</label>
+                    <input type="text" name="tc" class="form-control" required maxlength="11" placeholder="11 haneli TC">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Ad (*)</label>
+                    <input type="text" name="ad" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Soyad (*)</label>
+                    <input type="text" name="soyad" class="form-control" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Doğum Tarihi</label>
+                    <input type="date" name="dogum_tarihi" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Sicil Numarası</label>
+                    <input type="text" name="sicil_no" class="form-control" placeholder="Örn: SCL-2025-001">
+                </div>
+            </div>
+
+            <h5 class="text-secondary border-bottom pb-2 mb-3 mt-4">Kurumsal Bilgiler</h5>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Birim Seçin (*)</label>
+                    <select name="birim_id" class="form-select" required>
+                        <option value="" selected disabled>Seçiniz...</option>
+                        {% for b in birimler %}
+                        <option value="{{ b.BirimID }}">{{ b.BirimAdi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Görev Seçin (*)</label>
+                    <select name="gorev_id" class="form-select" required>
+                        <option value="" selected disabled>Seçiniz...</option>
+                        {% for g in gorevler %}
+                        <option value="{{ g.GorevTanimID }}">{{ g.GorevAdi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">İşe Giriş Tarihi (*)</label>
+                    <input type="date" name="ise_giris_tarihi" class="form-control" required value="{{ bugun }}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Ünvan</label>
+                    <input type="text" name="unvan" class="form-control" placeholder="Örn: Mühendis">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Branş</label>
+                    <input type="text" name="brans" class="form-control" placeholder="Örn: Bilgisayar">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">İstihdam Şekli</label>
+                    <select name="istihdam" class="form-select">
+                        <option value="Kadrolu">Kadrolu</option>
+                        <option value="Sözleşmeli">Sözleşmeli</option>
+                        <option value="Geçici Görev">Geçici Görev</option>
+                        <option value="Stajyer">Stajyer</option>
+                    </select>
+                </div>
+            </div>
+
+            <h5 class="text-secondary border-bottom pb-2 mb-3 mt-4">İletişim Bilgileri</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">E-Posta</label>
+                    <input type="email" name="eposta" class="form-control" placeholder="ornek@kurum.edu.tr">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Telefon</label>
+                    <input type="text" name="telefon" class="form-control" placeholder="0555 123 45 67">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Adres</label>
+                <textarea name="adres" class="form-control" rows="2"></textarea>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-success btn-lg">Kaydı Tamamla</button>
+                <a href="/personeller" class="btn btn-outline-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
